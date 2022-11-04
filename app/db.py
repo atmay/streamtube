@@ -1,3 +1,4 @@
+import os
 import pathlib
 from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider
@@ -8,10 +9,10 @@ from app.config import get_settings
 settings = get_settings()
 
 BASE_DIRECTORY = pathlib.Path(__file__).resolve().parent
-CONNECT_BUNDLE = BASE_DIRECTORY / 'secure_connect_streamtube.zip'
+CONNECT_BUNDLE = BASE_DIRECTORY / 'connect_bundle' / 'Archive.zip'
 
-ASTRADB_CLIENT_ID = settings.db_client_id
-ASTRADB_CLIENT_SECRET = settings.db_client_secret
+ASTRADB_CLIENT_ID = os.getenv('ASTRADB_CLIENT_ID')
+ASTRADB_CLIENT_SECRET = os.getenv('ASTRADB_CLIENT_SECRET')
 
 
 def get_db_session():

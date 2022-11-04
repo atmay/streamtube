@@ -1,3 +1,4 @@
+import os
 import uuid
 from ..config import get_settings
 from cassandra.cqlengine import columns
@@ -7,7 +8,7 @@ settings = get_settings()
 
 
 class User(Model):
-    __keyspace__ = settings.keyspace
+    __keyspace__ = os.getenv('ASTRADB_KEYSPACE')
     email = columns.Text(primary_key=True)
     user_id = columns.UUID(primary_key=True, default=uuid.uuid1)
     password = columns.Text()

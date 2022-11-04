@@ -6,12 +6,14 @@ from app.users.models import User
 from app.db import get_db_session
 
 app = FastAPI()
+DB_SESSION = None
 settings = get_settings()
 
 
 @app.on_event('startup')
 def on_startup():
-    get_db_session()
+    global DB_SESSION
+    DB_SESSION = get_db_session()
     sync_table(User)
 
 
