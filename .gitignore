@@ -2,3 +2,6 @@
 /bin
 /lib
 
+/pyvenv.cfg
+/app/connect_bundle/
+/app/connect_bundle/

@@ -1,6 +1,18 @@
 from fastapi import FastAPI
+from cassandra.cqlengine.management import sync_table
+
+from app.config import get_settings
+from app.users.models import User
+from app.db import get_db_session
 
 app = FastAPI()
+settings = get_settings()
+
+
+@app.on_event('startup')
+def on_startup():
+    get_db_session()
+    sync_table(User)
 
 
 @app.get("/")
